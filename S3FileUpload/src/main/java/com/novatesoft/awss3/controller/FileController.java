@@ -40,7 +40,7 @@ public class FileController {
     	public ResponseEntity<String>  deleteFile(@PathVariable("filename")String filename) {
     	System.out.println("The file  to be deleted"+filename);
     	 s3FileService.deleteFile(filename);
-    	 final String response = "[" + filename + "] deleted successfully.";
+    	  String response = "[" + filename + "] deleted successfully.";
          return new ResponseEntity<>(response, HttpStatus.OK);
     }
     	

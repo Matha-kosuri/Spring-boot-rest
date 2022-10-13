@@ -53,7 +53,11 @@ public class S3FileService implements S3FileServiceImpl{
 	@Override
 	public void deleteFile(String fileName) {
 		 DeleteObjectRequest deleteObjectRequest = new DeleteObjectRequest(bucketName, fileName);
+		 try {
 		 amazons3.deleteObject(deleteObjectRequest);
+		 }catch(Exception e) {
+			 throw new RuntimeException(e.getMessage());
+		 }
 	}
 
 	@Override
