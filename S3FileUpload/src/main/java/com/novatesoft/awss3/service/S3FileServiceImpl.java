@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 public interface S3FileServiceImpl {
 	
 	String  uploadFile(MultipartFile fileName);
-	String deleteFile(String fileName);
+	void deleteFile(String fileName);
 	byte[]  downloadFile(String fileName);
 	List<String>  getAllFiles();
 	

@@ -37,21 +37,25 @@ public class FileController {
     }
     
     @DeleteMapping("{filename}")
-    	public String deleteFile(@PathVariable("filename")String filename) {
-    	System.out.println("The file going to be deleted"+filename);
-    	
-    	return s3FileService.deleteFile(filename);
+    	public ResponseEntity<String>  deleteFile(@PathVariable("filename")String filename) {
+    	System.out.println("The file  to be deleted"+filename);
+    	 s3FileService.deleteFile(filename);
+    	 final String response = "[" + filename + "] deleted successfully.";
+         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     	
     @GetMapping("download/{filename}")
      public byte[] downloadFile(@PathVariable("filename") String filename) {
-    	 System.out.println("The file going to be dowloaded"+filename);
+    	 System.out.println("The file to be dowloaded"+filename);
           byte[]   downloadedfile= s3FileService.downloadFile(filename);
             return downloadedfile;
     		
     	}
-    }
+    
+    
+    
+  
 	
-	
+}
 
 

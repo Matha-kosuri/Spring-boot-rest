@@ -11,8 +11,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ListObjectsV2Result;
+import com.amazonaws.services.s3.model.MultiObjectDeleteException;
 import com.amazonaws.services.s3.model.PutObjectResult;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
@@ -47,10 +51,9 @@ public class S3FileService implements S3FileServiceImpl{
 	
 
 	@Override
-	public String deleteFile(String fileName) {
-		 amazons3.deleteObject(bucketName, fileName);
-		return "File deleted";
-		
+	public void deleteFile(String fileName) {
+		 DeleteObjectRequest deleteObjectRequest = new DeleteObjectRequest(bucketName, fileName);
+		 amazons3.deleteObject(deleteObjectRequest);
 	}
 
 	@Override
